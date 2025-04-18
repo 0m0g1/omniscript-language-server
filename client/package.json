@@ -16,6 +16,13 @@
           "extensions": [".os"],
           "configuration": "./language-configuration.json"
         }
+      ],
+      "grammars": [
+        {
+          "language": "omniscript",
+          "scopeName": "source.omniscript",
+          "path": "./syntaxes/omniscript.tmLanguage.json"
+        }
       ]
     },
     "dependencies": {

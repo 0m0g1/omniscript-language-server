@@ -3,6 +3,16 @@
       "lineComment": "//",
       "blockComment": ["/*", "*/"]
     },
+    "keywords": [
+      "let",
+      "const",
+      "function", // Add more keywords as necessary
+      "if",
+      "else",
+      "while",
+      "for",
+      "return"
+    ],
     "brackets": [
       ["{", "}"],
       ["[", "]"],
