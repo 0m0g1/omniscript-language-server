@@ -1,0 +1,25 @@
+{
+    "name": "omniscript-langserver",
+    "displayName": "OmniScript Language Server",
+    "description": "LSP for OmniScript",
+    "version": "0.0.1",
+    "engines": {
+      "vscode": "^1.70.0"
+    },
+    "main": "./extension.js",
+    "activationEvents": ["onLanguage:omniscript"],
+    "contributes": {
+      "languages": [
+        {
+          "id": "omniscript",
+          "aliases": ["OmniScript", "OS", "Os", "os"],
+          "extensions": [".os"],
+          "configuration": "./language-configuration.json"
+        }
+      ]
+    },
+    "dependencies": {
+      "vscode-languageclient": "^9.0.0"
+    }
+  }
+  
