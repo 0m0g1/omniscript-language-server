@@ -1,16 +1,45 @@
 {
-  "name": "language-server",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "vscode-languageclient": "^9.0.1",
-    "vscode-languageserver": "^9.0.1"
+    "name": "omniscript-langserver",
+    "displayName": "OmniScript Language Server",
+    "description": "LSP for OmniScript",
+    "version": "0.0.1",
+    "publisher": "0m0g1",
+    "engines": {
+      "vscode": "^1.70.0"
+    },
+    "scripts": {
+      "compile": "tsc -p ./",
+      "watch": "tsc -watch -p ./",
+      "start": "node ./client/extension.js"
+    },
+    "main": "./client/extension.js",
+    "activationEvents": ["onLanguage:omniscript"],
+    "contributes": {
+      "languages": [
+        {
+          "id": "omniscript",
+          "aliases": ["OmniScript", "OS", "Os", "os"],
+          "extensions": [".os"],
+          "configuration": "./client/language-configuration.json"
+        }
+      ],
+      "grammars": [
+        {
+          "language": "omniscript",
+          "scopeName": "source.omniscript",
+          "path": "./syntaxes/omniscript.tmLanguage.json"
+        }
+      ],
+      "iconThemes": [
+        {
+          "id": "omniscript-icon-theme",
+          "label": "OmniScript Icon Theme",
+          "path": "./icons/file-icon-theme.json"
+        }
+      ]
+    },
+    "dependencies": {
+      "vscode-languageclient": "^9.0.0"
+    }
   }
-}
+  

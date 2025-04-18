@@ -1,0 +1,23 @@
+{
+  "iconDefinitions": {
+    "omniscript": {
+      "iconPath": "./omniscript-icon.png"
+    }
+  },
+  "fileExtensions": {
+    "os": "omniscript"
+  },
+  "languageIds": {
+    "omniscript": "omniscript"
+  },
+  "light": {
+    "fileExtensions": {
+      "os": "omniscript"
+    }
+  },
+  "dark": {
+    "fileExtensions": {
+      "os": "omniscript"
+    }
+  }
+}
