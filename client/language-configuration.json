@@ -1,36 +1,102 @@
 {
-    "comments": {
-      "lineComment": "//",
-      "blockComment": ["/*", "*/"]
-    },
-    "keywords": [
-      "let",
-      "const",
-      "function", // Add more keywords as necessary
-      "if",
-      "else",
-      "while",
-      "for",
-      "return"
-    ],
-    "brackets": [
-      ["{", "}"],
-      ["[", "]"],
-      ["(", ")"]
-    ],
-    "autoClosingPairs": [
-      { "open": "{", "close": "}" },
-      { "open": "[", "close": "]" },
-      { "open": "(", "close": ")" },
-      { "open": "\"", "close": "\"" },
-      { "open": "'", "close": "'" }
-    ],
-    "surroundingPairs": [
-      { "open": "{", "close": "}" },
-      { "open": "[", "close": "]" },
-      { "open": "(", "close": ")" },
-      { "open": "\"", "close": "\"" },
-      { "open": "'", "close": "'" }
+  "comments": {
+    "lineComment": "//",
+    "blockComment": [
+      "/*",
+      "*/"
     ]
-  }
-  
+  },
+  "keywords": [
+    "let",
+    "const",
+    "function",
+    "if",
+    "else",
+    "while",
+    "for",
+    "return",
+    "break",
+    "continue",
+    "switch",
+    "case",
+    "default",
+    "try",
+    "catch",
+    "finally",
+    "throw",
+    "import",
+    "export",
+    "class",
+    "extends",
+    "super",
+    "static",
+    "new",
+    "delete",
+    "void",
+    "true",
+    "false",
+    "null",
+    "typeof",
+    "instanceof",
+    "await",
+    "async"
+  ],
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"]
+  ],
+  "autoClosingPairs": [
+    { "open": "[", "close": "]" },
+    { "open": "{", "close": "}" },
+    { "open": "(", "close": ")" },
+    { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+    { "open": "\"", "close": "\"", "notIn": ["string"] },
+    { "open": "/*", "close": "*/", "notIn": ["string", "comment"] },
+    { "open": "/**", "close": "*/", "notIn": ["string"] }
+  ],
+  "surroundingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["\"", "\""],
+    ["'", "'"],
+    ["<", ">"]
+  ],
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+  "folding": {
+    "markers": {
+      "start": "^\\s*#pragma\\s+region\\b",
+      "end": "^\\s*#pragma\\s+endregion\\b"
+    }
+  },
+  "indentationRules": {
+    "decreaseIndentPattern": {
+      "pattern": "^\\s*[\\}\\]\\)].*$"
+    },
+    "increaseIndentPattern": {
+      "pattern": "^.*(\\{[^}]*|\\([^)]*|\\[[^\\]]*)$"
+    }
+  },
+  "onEnterRules": [
+    {
+      "previousLineText": "^\\s*(((else ?)?if|for|while)\\s*\\(.*\\)\\s*|else\\s*)$",
+      "beforeText": "^\\s+([^{i\\s]|i(?!f\\b))",
+      "action": {
+        "indent": "outdent"
+      }
+    },
+    {
+      "beforeText": {
+        "pattern": "//.*"
+      },
+      "afterText": {
+        "pattern": "^(?!\\s*$).+"
+      },
+      "action": {
+        "indent": "none",
+        "appendText": "// "
+      }
+    }
+  ]
+}

@@ -30,6 +30,12 @@
           "path": "./syntaxes/omniscript.tmLanguage.json"
         }
       ],
+      "snippets": [
+        {
+          "language": "omniscript",
+          "path": "./snippets/omniscript.code-snippets"
+        }
+      ],
       "iconThemes": [
         {
           "id": "omniscript-icon-theme",

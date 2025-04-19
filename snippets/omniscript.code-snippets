@@ -1,0 +1,332 @@
+{   
+    "Struct" : {
+        "prefix": "strct",
+        "body": [
+            "struct ${1:name} {",
+            "\t${2:fieldName} : ${3:fieldType} = ${4:defaultValue};",
+            "}"
+        ],
+        "description": "struct definition"
+    },
+    "Constructor": {
+        "prefix": "constructor",
+        "body": [
+            "constructor() {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Constructor"
+    },
+    "Destructor": {
+        "prefix": "destructor",
+        "body": [
+            "destructor() {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Constructor"
+    },
+    "Class Definition": {
+        "prefix": "class",
+        "isFileTemplate": true,
+        "body": [
+            "class ${1:name} {",
+            "\tconstructor(${2:parameters}) {",
+            "\t\t$0",
+            "\t}",
+            "\tdestructor() {",
+            "\t\t$0",
+            "\t}",
+            "}"
+        ],
+        "description": "Class Definition"
+    },
+    "Public Method Definition": {
+        "prefix": "public method",
+        "body": [
+            "public ${1:name}() {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Public Method Definition"
+    },
+    "Private Method Definition": {
+        "prefix": "private method",
+        "body": [
+            "private ${1:name}() {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Private Method Definition"
+    },
+    "Property getter": {
+        "prefix": "get",
+        "body": [
+            "",
+            "public get ${1:value}() => ${2:type} {",
+            "\t${3:return $0}",
+            "}",
+            ""
+        ],
+        "description": "Property getter"
+    },
+    "Property setter": {
+        "prefix": "set",
+        "body": [
+            "",
+            "public set ${1:value}(v : ${2:string}) {",
+            "\tthis.$3 = v;",
+            "}",
+            ""
+        ],
+        "description": "Property setter"
+    },
+    "Define a full property": {
+        "prefix": "prop",
+        "body": [
+            "",
+            "private _${1:value} : ${2:string};",
+            "public get ${1:value}() : ${2:string} {",
+            "\treturn this._${1:value};",
+            "}",
+            "public set ${1:value}(v : ${2:string}) {",
+            "\tthis._${1:value} = v;",
+            "}",
+            ""
+        ],
+        "description": "Define a full property"
+    },
+    "Import Statement" : {
+        "prefix": "import",
+        "body": "import {$0} from \"${1:./module/path}\";",
+        "description": "Import an external module"
+    },
+    "Log to the console": {
+        "prefix": "log",
+        "body": [
+            "console.log($1);",
+            "$0"
+        ],
+        "description": "Log to the console"
+    },
+    "Log warning to console": {
+        "prefix": "warn",
+        "body": [
+            "console.warn($1);",
+            "$0"
+        ],
+        "description": "Log warning to the console"
+    },
+    "Log error to console": {
+        "prefix": "error",
+        "body": [
+            "console.error($1);",
+            "$0"
+        ],
+        "description": "Log error to the console"
+    },
+    "Log info to console": {
+        "prefix": "info",
+        "body": [
+            "console.info($1);",
+            "$0"
+        ],
+        "description": "Log info to the console"
+    },
+    "For Loop": {
+        "prefix": "for",
+        "body": [
+            "for (let ${1:index} = 0; ${1:index} < ${2:array}.length; ${1:index}++) {",
+            "\tconst ${3:element} = ${2:array}[${1:index}];",
+            "\t$TM_SELECTED_TEXT$0",
+            "}"
+        ],
+        "description": "For Loop"
+    },
+    "For-Each Loop using =>": {
+        "prefix": "foreach =>",
+        "body": [
+            "${1:array}.forEach(${2:element} => {",
+            "\t$TM_SELECTED_TEXT$0",
+            "});"
+        ],
+        "description": "For-Each Loop using =>"
+    },
+    "For-In Loop": {
+        "prefix": "forin",
+        "body": [
+            "for (const ${1:key} in ${2:object}) {",
+            "\tconst ${3:element} = ${1:key}.value();",
+            "\t$TM_SELECTED_TEXT$0",
+            "}"
+        ],
+        "description": "For-In Loop"
+    },
+   "Function Statement": {
+        "prefix": "function",
+        "body": [
+            "function ${1:name}(${2:params}) => ${3:returnType} {",
+            "\t$TM_SELECTED_TEXT$0",
+            "}"
+        ]
+    },
+    "Template Function": {
+        "prefix": "template",
+        "body": [
+            "function ${2:name}<${1:T}>(${3:arg}: ${1:T}) => ${1:T} {",
+            "\t$0",
+            "\treturn ${3:arg};",
+            "}"
+        ],
+        "description": "Template function with one type parameter"
+    },
+    "Bounded Template Function": {
+        "prefix": "boundedtemplate",
+        "body": [
+            "<${1:T} extends ${2:type1} | ${3:type2} | ${4:type3}>",
+            "function ${5:name}(${6:a}: ${1:T}, ${7:b}: ${1:T}) => ${1:T} {",
+            "\treturn ${6:a} + ${7:b};",
+            "}"
+        ],
+        "description": "Template function with type bounds"
+    },
+    "If Statement": {
+        "prefix": "if",
+        "body": [
+            "if (${1:condition}) {",
+            "\t$TM_SELECTED_TEXT$0",
+            "}"
+        ],
+        "description": "If Statement"
+    },
+    "If-Else Statement": {
+        "prefix": "ifelse",
+        "body": [
+            "if (${1:condition}) {",
+            "\t$TM_SELECTED_TEXT$0",
+            "} else {",
+            "\t",
+            "}"
+        ],
+        "description": "If-Else Statement"
+    },
+    "New Statement": {
+        "prefix": "new",
+        "body": [
+            "const ${1:name} = new ${2:type}(${3:arguments});$0"
+        ],
+        "description": "New Statement"
+    },
+    "Heap Object New Statement": {
+        "prefix": "new heap",
+        "body": [
+            "const ${1:name} = new heap ${2:type}(${3:arguments});$0"
+        ],
+        "description": "New object on the heap"
+    },
+    "Switch Statement": {
+        "prefix": "switch",
+        "body": [
+            "switch (${1:key}) {",
+            "\tcase ${2:value}:",
+            "\t\t$0",
+            "\t\tbreak;",
+            "",
+            "\tdefault:",
+            "\t\tbreak;",
+            "}"
+        ],
+        "description": "Switch Statement"
+    },
+    "While Statement": {
+        "prefix": "while",
+        "body": [
+            "while (${1:condition}) {",
+            "\t$TM_SELECTED_TEXT$0",
+            "}"
+        ],
+        "description": "While Statement"
+    },
+    "Do-While Statement": {
+        "prefix": "dowhile",
+        "body": [
+            "do {",
+            "\t$TM_SELECTED_TEXT$0",
+            "} while (${1:condition});"
+        ],
+        "description": "Do-While Statement"
+    },
+    "Try-Catch Statement": {
+        "prefix": "trycatch",
+        "body": [
+            "try {",
+            "\t$TM_SELECTED_TEXT$0",
+            "} catch (${1:error}) {",
+            "\t",
+            "}"
+        ],
+        "description": "Try-Catch Statement"
+    },
+    "Set Timeout Function": {
+        "prefix": "settimeout",
+        "body": [
+            "setTimeout(() => {",
+            "\t$TM_SELECTED_TEXT$0",
+            "}, ${1:timeout});"
+        ],
+        "description": "Set Timeout Function"
+    },
+    "Set Interval Function": {
+        "prefix": "setinterval",
+        "body": [
+            "setInterval(() => {",
+            "\t$TM_SELECTED_TEXT$0",
+            "}, ${1:interval});"
+        ],
+        "description": "Set Interval Function"
+    },
+    "Enum Declaration": {
+        "prefix": "enum",
+        "body": [
+            "enum ${1:EnumName} {",
+            "\t${2:item1},",
+            "\t${3:item2}",
+            "}"
+        ],
+        "description": "Enum declaration with optional lookup flag"
+    },
+    "Lookup Enum Declaration": {
+        "prefix": "enum",
+        "body": [
+            "enum ${1:EnumName}(lookup) {",
+            "\t${2:item1},",
+            "\t${3:item2}",
+            "}"
+        ],
+        "description": "Enum declaration with optional lookup flag"
+    },
+    "Enum class Declaration (Optional Lookup)": {
+        "prefix": "enum class",
+        "body": [
+            "enum class ${1:EnumName}${2:(lookup)} {",
+            "\t${3:item1},",
+            "\t${4:item2}",
+        "}"
+        ],
+        "description": "Enum declaration with optional lookup flag"
+    },
+    "Region Start": {
+        "prefix": "#region",
+        "body": [
+            "//#region $0"
+        ],
+        "description": "Folding Region Start"
+    },
+    "Region End": {
+        "prefix": "#endregion",
+        "body": [
+            "//#endregion"
+        ],
+        "description": "Folding Region End"
+    },
+}
