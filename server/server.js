@@ -84,7 +84,7 @@ const {
     return {
       contents: {
         kind: 'markdown',
-        value: '**This is OmniScript!**'
+        value: '**Some OmniScript code!🤷‍♂️**\nAurthor: @0m0g1'
       }
     };
   });

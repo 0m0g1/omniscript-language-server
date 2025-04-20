@@ -1,5 +1,5 @@
 {
-    "Namespace Declaration" : {
+    "Namespace Declaration": {
         "prefix": "namespace",
         "isFileTemplate": true,
         "body": [
@@ -9,7 +9,7 @@
         ],
         "description": "Create a namespace"
     },
-    "Module Declaration" : {
+    "Module Declaration": {
         "prefix": "module",
         "isFileTemplate": true,
         "body": [
@@ -19,17 +19,31 @@
         ],
         "description": "Create module"
     },
-    "Public Inline Module Nesting" : {
+    "Deprecated": {
+        "prefix": "deprecated",
+        "body": [
+            "[[deprecated(\"${1:message}\")]]"
+        ],
+        "description": "Mark a function, variable, or class as deprecated"
+    },
+    "Inline Deprecated Attribute": {
+        "prefix": ["deprecated"],
+        "body": [
+            "deprecated${0}"
+        ],
+        "description": "Inline deprecation"
+    },
+    "Public Inline Module Nesting": {
         "prefix": "public module",
         "body": "public module ${1:name} = import \"${2:./module/path}\";",
         "description": "Nest a module in another file and expose it"
     },
-    "Private Inline Module Nesting" : {
+    "Private Inline Module Nesting": {
         "prefix": "private module",
         "body": "private module ${1:name} = import \"${2:./module/path}\";",
         "description": "Nest a module in another file and hide it in the current module"
     },
-    "Struct" : {
+    "Struct": {
         "prefix": "strct",
         "body": [
             "struct ${1:name} {",
@@ -48,13 +62,13 @@
         "description": "Constructor"
     },
     "Destructor": {
-        "prefix": "destructor",
+        "prefix": "~destructor",
         "body": [
-            "destructor() {",
+            "~destructor() {",
             "\t$0",
             "}"
         ],
-        "description": "Constructor"
+        "description": "Destructor"
     },
     "Class Definition": {
         "prefix": "class",
@@ -74,7 +88,7 @@
     "Public Method Definition": {
         "prefix": "public method",
         "body": [
-            "public ${1:name}() {",
+            "public ${1:name}() => ${2:type} {",
             "\t$0",
             "}"
         ],
@@ -83,7 +97,25 @@
     "Private Method Definition": {
         "prefix": "private method",
         "body": [
-            "private ${1:name}() {",
+            "private ${1:name}() => ${2:type} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Private Method Definition"
+    },
+    "Public void Method Definition": {
+        "prefix": "public void method",
+        "body": [
+            "public ${1:name}() => void {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Public Method Definition"
+    },
+    "Private void Method Definition": {
+        "prefix": "private void method",
+        "body": [
+            "private ${1:name}() => void {",
             "\t$0",
             "}"
         ],
@@ -93,7 +125,7 @@
         "prefix": "get",
         "body": [
             "",
-            "public get ${1:value}() => ${2:type} {",
+            "public get${1:value}() => ${2:type} {",
             "\t${3:return $0}",
             "}",
             ""
@@ -104,7 +136,7 @@
         "prefix": "set",
         "body": [
             "",
-            "public set ${1:value}(v : ${2:string}) {",
+            "public set${1:value}(v : ${2:string}) => void {",
             "\tthis.$3 = v;",
             "}",
             ""
@@ -126,7 +158,7 @@
         ],
         "description": "Define a full property"
     },
-    "Import Statement" : {
+    "Import Statement": {
         "prefix": "import",
         "body": "import {$0} from \"${1:./module/path}\";",
         "description": "Import an external module"
@@ -192,7 +224,7 @@
         ],
         "description": "For-In Loop"
     },
-   "Function Statement": {
+    "Function Statement": {
         "prefix": "function",
         "body": [
             "function ${1:name}(${2:params}) => ${3:returnType} {",
@@ -341,7 +373,7 @@
             "enum class ${1:EnumName}${2:(lookup)} {",
             "\t${3:item1},",
             "\t${4:item2}",
-        "}"
+            "}"
         ],
         "description": "Enum declaration with optional lookup flag"
     },
@@ -359,4 +391,627 @@
         ],
         "description": "Folding Region End"
     },
+    // Literals and var declarations
+    "Bool": {
+        "prefix": "bool",
+        "body": [
+            "bool${0}"
+        ],
+        "description": "Bool type"
+    },
+    "True": {
+        "prefix": "true",
+        "body": [
+            "true${0}"
+        ],
+        "description": "True literal"
+    },
+    "False": {
+        "prefix": "false",
+        "body": [
+            "false${0}"
+        ],
+        "description": "False literal"
+    },
+    "Implied type variable declaration": {
+        "prefix": ["let", "let var"],
+        "body": [
+            "let ${1:variable} = ${2:value};"
+        ],
+        "description": "Declare a variable with an implied type"
+    },
+    "Implied type constant declaration": {
+        "prefix": ["const", "const var", "constant var"],
+        "body": [
+            "const ${1:variable} = ${2:value};"
+        ],
+        "description": "Declare a variable with an implied type"
+    },
+    "Bool variable declaration": {
+        "prefix": "let bool",
+        "body": [
+            "let ${1:flag}: bool = ${2:true};"
+        ],
+        "description": "Declare a boolean variable"
+    },
+    "False variable declaration": {
+        "prefix": "let false var",
+        "body": [
+            "let ${1:flag}: bool = false;",
+            "${0}"
+        ],
+        "description": "Declare a variable initialized to false"
+    },
+    "True variable declaration": {
+        "prefix": "let true var",
+        "body": [
+            "let ${1:flag}: bool = true;",
+            "${0}"
+        ],
+        "description": "Declare a variable initialized to true"
+    },
+    "Void": {
+        "prefix": "let void",
+        "body": [
+            "let ${1:nothing}: void;"
+        ],
+        "description": "Void (typically for return type or null pointer)"
+    },
+    // Integers
+    "Int8": {
+        "prefix": [
+            "i8",
+            "int8"
+        ],
+        "body": [
+            "int8${0}"
+        ],
+        "description": "Signed 8-bit integer"
+    },
+    "Int8 Declaration": {
+        "prefix": [
+            "let i8",
+            "let int8"
+        ],
+        "body": [
+            "let ${1:n}: int8 = ${2:0};"
+        ],
+        "description": "Signed 8-bit integer value declaration"
+    },
+    "UInt8": {
+        "prefix": [
+            "u8",
+            "uint8"
+        ],
+        "body": [
+            "uint8${0}"
+        ],
+        "description": "Unsigned 8-bit integer"
+    },
+    "UInt8 Declaration": {
+        "prefix": [
+            "let u8",
+            "let uint8"
+        ],
+        "body": [
+            "let ${1:n}: uint8 = ${2:0};"
+        ],
+        "description": "Unsigned 8-bit integer value declaration"
+    },
+    "Int16": {
+        "prefix": [
+            "i16",
+            "int16"
+        ],
+        "body": [
+            "int16${0}"
+        ],
+        "description": "Signed 16-bit integer"
+    },
+    "Int16 Declaration": {
+        "prefix": [
+            "let i16",
+            "let int16"
+        ],
+        "body": [
+            "let ${1:n}: int16 = ${2:0};"
+        ],
+        "description": "Signed 16-bit integer value declaration"
+    },
+    "UInt16": {
+        "prefix": [
+            "u16",
+            "uint16"
+        ],
+        "body": [
+            "uint16${0}"
+        ],
+        "description": "Unsigned 16-bit integer"
+    },
+    "UInt16 Declaration": {
+        "prefix": [
+            "let u16",
+            "let uint16"
+        ],
+        "body": [
+            "let ${1:n}: uint16 = ${2:0};"
+        ],
+        "description": "Unsigned 16-bit integer value declaration"
+    },
+    "Int32": {
+        "prefix": [
+            "i32",
+            "int32"
+        ],
+        "body": [
+            "int32${0}"
+        ],
+        "description": "Signed 32-bit integer"
+    },
+    "Int32 Declaration": {
+        "prefix": [
+            "let i32",
+            "let int32"
+        ],
+        "body": [
+            "let ${1:n}: int32 = ${2:0};"
+        ],
+        "description": "Signed 32-bit integer value declaration"
+    },
+    "UInt32": {
+        "prefix": [
+            "u32",
+            "uint32"
+        ],
+        "body": [
+            "uint32${0}"
+        ],
+        "description": "Unsigned 32-bit integer"
+    },
+    "UInt32 Declaration": {
+        "prefix": [
+            "let u32",
+            "let uint32"
+        ],
+        "body": [
+            "let ${1:n}: uint32 = ${2:0};"
+        ],
+        "description": "Unsigned 32-bit integer value declaration"
+    },
+    "Int64": {
+        "prefix": [
+            "i64",
+            "int64"
+        ],
+        "body": [
+            "int64${0}"
+        ],
+        "description": "Signed 64-bit integer"
+    },
+    "Int64 Declaration": {
+        "prefix": [
+            "let i64",
+            "let int64"
+        ],
+        "body": [
+            "let ${1:n}: int64 = ${2:0};"
+        ],
+        "description": "Signed 64-bit integer value declaration"
+    },
+    "UInt64": {
+        "prefix": [
+            "u64",
+            "uint64"
+        ],
+        "body": [
+            "uint64${0}"
+        ],
+        "description": "Unsigned 64-bit integer"
+    },
+    "UInt64 Declaration": {
+        "prefix": [
+            "let u64",
+            "let uint64"
+        ],
+        "body": [
+            "let ${1:n}: uint64 = ${2:0};"
+        ],
+        "description": "Unsigned 64-bit integer value declaration"
+    },
+    "Int128": {
+        "prefix": [
+            "i128",
+            "int128"
+        ],
+        "body": [
+            "int128${0}"
+        ],
+        "description": "Signed 128-bit integer"
+    },
+    "Int128 Declaration": {
+        "prefix": [
+            "let i128",
+            "let int128"
+        ],
+        "body": [
+            "let ${1:n}: int128 = ${2:0};"
+        ],
+        "description": "Signed 128-bit integer value declaration"
+    },
+    "UInt128": {
+        "prefix": [
+            "u128",
+            "uint128"
+        ],
+        "body": [
+            "uint128${0}"
+        ],
+        "description": "Unsigned 128-bit integer"
+    },
+    "UInt128 Declaration": {
+        "prefix": [
+            "let u128",
+            "let uint128"
+        ],
+        "body": [
+            "let ${1:n}: uint128 = ${2:0};"
+        ],
+        "description": "Unsigned 128-bit integer value declaration"
+    },
+    "Int256": {
+        "prefix": [
+            "i256",
+            "int256"
+        ],
+        "body": [
+            "int256${0}"
+        ],
+        "description": "Signed 256-bit integer"
+    },
+    "Int256 Declaration": {
+        "prefix": [
+            "let i256",
+            "let int256"
+        ],
+        "body": [
+            "let ${1:n}: int256 = ${2:0};"
+        ],
+        "description": "Signed 256-bit integer value declaration"
+    },
+    "UInt256": {
+        "prefix": [
+            "u256",
+            "uint256"
+        ],
+        "body": [
+            "uint256${0}"
+        ],
+        "description": "Unsigned 256-bit integer"
+    },
+    "UInt256 Declaration": {
+        "prefix": [
+            "let u256",
+            "let uint256"
+        ],
+        "body": [
+            "let ${1:n}: uint256 = ${2:0};"
+        ],
+        "description": "Unsigned 256-bit integer value declaration"
+    },
+    "Int512": {
+        "prefix": [
+            "i512",
+            "int512"
+        ],
+        "body": [
+            "int512${0}"
+        ],
+        "description": "Signed 512-bit integer"
+    },
+    "Int512 Declaration": {
+        "prefix": [
+            "let i512",
+            "let int512"
+        ],
+        "body": [
+            "let ${1:n}: int512 = ${2:0};"
+        ],
+        "description": "Signed 512-bit integer value declaration"
+    },
+    "UInt512": {
+        "prefix": [
+            "u512",
+            "uint512"
+        ],
+        "body": [
+            "uint512${0}"
+        ],
+        "description": "Unsigned 512-bit integer"
+    },
+    "UInt512 Declaration": {
+        "prefix": [
+            "let u512",
+            "let uint512"
+        ],
+        "body": [
+            "let ${1:n}: uint512 = ${2:0};"
+        ],
+        "description": "Unsigned 512-bit integer value declaration"
+    },
+    "Int1024": {
+        "prefix": [
+            "i1024",
+            "int1024"
+        ],
+        "body": [
+            "int1024${0}"
+        ],
+        "description": "Signed 1024-bit integer"
+    },
+    "Int1024 Declaration": {
+        "prefix": [
+            "let i1024",
+            "let int1024"
+        ],
+        "body": [
+            "let ${1:n}: int1024 = ${2:0};"
+        ],
+        "description": "Signed 1024-bit integer value declaration"
+    },
+    "UInt1024": {
+        "prefix": [
+            "u1024",
+            "uint1024"
+        ],
+        "body": [
+            "uint1024${0}"
+        ],
+        "description": "Unsigned 1024-bit integer"
+    },
+    "UInt1024 Declaration": {
+        "prefix": [
+            "let u1024",
+            "let uint1024"
+        ],
+        "body": [
+            "let ${1:n}: uint1024 = ${2:0};"
+        ],
+        "description": "Unsigned 1024-bit integer value declaration"
+    },
+    "BigInt": {
+        "prefix": [
+            "BigInt",
+            "bigint"
+        ],
+        "body": [
+            "BigInt${0}"
+        ],
+        "description": "Arbitrary-precision integer"
+    },
+    "BigInt Declaration": {
+        "prefix": [
+            "let BigInt",
+            "let bigint"
+        ],
+        "body": [
+            "let ${1:n}: BigInt = ${2:0};"
+        ],
+        "description": "Arbitrary-precision integer value declaration"
+    },
+    // Floating point
+    "Half": {
+        "prefix": ["half", "f16"],
+        "body": [
+            "half${0}"
+        ],
+        "description": "16-bit floating point"
+    },
+    "Half Declaration": {
+        "prefix": [
+            "let f16",
+            "let half"
+        ],
+        "body": [
+            "let ${1:f}: half = ${2:0.0};"
+        ],
+        "description": "16-bit floating point value declaration"
+    },
+    "Float": {
+        "prefix": ["float", "f32"],
+        "body": [
+            "float"
+        ],
+        "description": "32-bit float"
+    },
+    "Float Declaration": {
+        "prefix": [
+            "let f32",
+            "let float"
+        ],
+        "body": [
+            "let ${1:f}: float = ${2:0.0};"
+        ],
+        "description": "32-bit float value declaration"
+    },
+    "Double": {
+        "prefix": ["double", "f64"],
+        "body": [
+            "double${0}"
+        ],
+        "description": "64-bit double"
+    },
+    "Double Declaration": {
+        "prefix": [
+            "let f64",
+            "let double"
+        ],
+        "body": [
+            "let ${1:f}: double = ${2:0.0};"
+        ],
+        "description": "64-bit double value declaration"
+    },
+    "FP128": {
+        "prefix": ["f128", "FP128", "long double", "long_double"],
+        "body": [
+            "long_double${0}"
+        ],
+        "description": "128-bit float"
+    },
+    "FP128 Declaration": {
+        "prefix": [
+            "let f128",
+            "let fp128"
+        ],
+        "body": [
+            "let ${1:f}: long_double = ${2:0.0};"
+        ],
+        "description": "128-bit float value declaration"
+    },
+    "X86_FP80": {
+        "prefix": "x86_fp80",
+        "body": [
+            "x86_fp80${0}"
+        ],
+        "description": "Intel x87 80-bit float"
+    },
+    "X86_FP80 Declaration": {
+        "prefix": "let x86_fp80",
+        "body": [
+            "let ${1:f}: x86_fp80 = ${2:0.0};"
+        ],
+        "description": "Intel x87 80-bit float value declaration"
+    },
+    "PPC_FP128": {
+        "prefix": "ppc_fp128",
+        "body": [
+            "ppc_fp128${0};"
+        ],
+        "description": "PowerPC 128-bit float"
+    },
+    "PPC_FP128 Declaration": {
+        "prefix": "let ppc_fp128",
+        "body": [
+            "let ${1:f}: ppc_fp128 = ${2:0.0};"
+        ],
+        "description": "PowerPC 128-bit float value declaration"
+    },
+    "String": {
+        "prefix": "string",
+        "body": [
+            "let ${1:text}: string = \"${2:Hello}\";"
+        ],
+        "description": "UTF-8 string (char*)"
+    },
+    "UTF8": {
+        "prefix": "utf8",
+        "body": [
+            "let ${1:text}: utf8 = \"${2:Hello}\";"
+        ],
+        "description": "UTF-16 string (pointer)"
+    },
+    "UTF16": {
+        "prefix": "utf16",
+        "body": [
+            "let ${1:text}: utf16 = \"${2:Hello}\";"
+        ],
+        "description": "UTF-16 string (pointer)"
+    },
+    "UTF32": {
+        "prefix": "utf32",
+        "body": [
+            "let ${1:text}: utf32 = \"${2:Hello}\";"
+        ],
+        "description": "UTF-32 string (pointer)"
+    },
+    "int32 variable": {
+        "prefix": "int32",
+        "body": [
+            "let ${1:varName}: int32 = ${2:0};"
+        ],
+        "description": "Declare int32 variable"
+    },
+    "float64 variable": {
+        "prefix": "f64",
+        "body": [
+            "let ${1:varName}: f64 = ${2:0.0};"
+        ],
+        "description": "Declare float64 (f64) variable"
+    },
+    "pointer variable": {
+        "prefix": "ptr",
+        "body": [
+            "let ${1:varName}: ${2:int32}* = ${3:null};"
+        ],
+        "description": "Declare a pointer to a type"
+    },
+    "reference variable": {
+        "prefix": "ref",
+        "body": [
+            "let ${1:varName}: &${2:int32} = ${3:someRef};"
+        ],
+        "description": "Declare a reference to a type"
+    },
+    "fixed array": {
+        "prefix": "farr",
+        "body": [
+            "let ${1:arrName}: [${2:4}]${3:int32} = [${4:0}, ${5:0}, ${6:0}, ${7:0}];"
+        ],
+        "description": "Declare a fixed-size array"
+    },
+    "dynamic array": {
+        "prefix": "darr",
+        "body": [
+            "let ${1:arrName}: []${2:int32} = [];"
+        ],
+        "description": "Declare a dynamic array"
+    },
+    "multi-dimensional fixed array": {
+        "prefix": "mfarr",
+        "body": [
+            "let ${1:matrix}: [${2:4}][${3:3}]${4:int32} = ...;"
+        ],
+        "description": "Declare a 2D fixed-size array"
+    },
+    "type alias": {
+        "prefix": "typealias",
+        "body": [
+            "type ${1:AliasName} = ${2:int32};"
+        ],
+        "description": "Create a type alias"
+    },
+    "pointer to pointer": {
+        "prefix": "pptr",
+        "body": [
+            "let ${1:ptrName}: ${2:int32}** = ${3:null};"
+        ],
+        "description": "Pointer to pointer"
+    },
+    "reference to array": {
+        "prefix": "refarr",
+        "body": [
+            "let ${1:refName}: &[]${2:int32} = ${3:someArray};"
+        ],
+        "description": "Reference to a dynamic array"
+    },
+    "utf8 string": {
+        "prefix": "str",
+        "body": [
+            "let ${1:text}: string = \"${2:Hello, World}\";"
+        ],
+        "description": "UTF8 string"
+    },
+    "utf16 string": {
+        "prefix": "utf16",
+        "body": [
+            "let ${1:text}: utf16* = ${2:null};"
+        ],
+        "description": "UTF16 pointer string"
+    },
+    "utf32 string": {
+        "prefix": "utf32",
+        "body": [
+            "let ${1:text}: utf32* = ${2:null};"
+        ],
+        "description": "UTF32 pointer string"
+    }
 }
