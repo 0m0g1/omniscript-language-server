@@ -33,6 +33,18 @@
             "settings": {
                 "foreground": "#DAA520"
             }
+        },
+        {
+            "scope": "comment.block.omniscript",
+            "settings": {
+                "foreground": "#888888"
+            }
+        },
+        {
+            "scope": "comment.block.nested.omniscript",
+            "settings": {
+                "foreground": "#AAAAAA"
+            }
         }
     ]
 }

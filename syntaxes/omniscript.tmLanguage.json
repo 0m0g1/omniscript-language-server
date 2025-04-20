@@ -4,21 +4,28 @@
     "scopeName": "source.omniscript",
     "patterns": [
       {
-        "name": "keyword.control.omniscript",
-        "match": "\\b(let|const|function|if|else|while|for|return)\\b"
-      },
-      {
-        "name": "keyword.control.with.omniscript",
-        "match": "\\bwith\\b"
-      },
-      {
         "name": "comment.line.double-slash.omniscript",
         "match": "//.*$"
       },
       {
         "name": "comment.block.omniscript",
         "begin": "/\\*",
-        "end": "\\*/"
+        "end": "\\*/",
+        "patterns": [
+          {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "contentName": "comment.block.omniscript"
+          }
+        ]
+      },      
+      {
+        "name": "keyword.control.omniscript",
+        "match": "\\b(let|const|function|if|else|while|for|return)\\b"
+      },
+      {
+        "name": "keyword.control.with.omniscript",
+        "match": "\\bwith\\b"
       },
       {
         "name": "keyword.type",
