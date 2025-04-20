@@ -8,6 +8,10 @@
         "match": "\\b(let|const|function|if|else|while|for|return)\\b"
       },
       {
+        "name": "keyword.control.with.omniscript",
+        "match": "\\bwith\\b"
+      },
+      {
         "name": "comment.line.double-slash.omniscript",
         "match": "//.*$"
       },
@@ -53,12 +57,25 @@
         "match": "(extends\\s+[a-zA-Z_][a-zA-Z0-9_]*)(\\s*\\|\\s*[a-zA-Z_][a-zA-Z0-9_]*)*"
       },
       {
+        "name": "entity.other.inherited-class.mixin.omniscript",
+        "match": "(?<=\\bwith\\s)([A-Za-z_][A-Za-z0-9_]*(\\s*,\\s*[A-Za-z_][A-Za-z0-9_]*)*)",
+        "captures": {
+          "1": {
+            "name": "entity.other.inherited-class.mixin.omniscript"
+          }
+        }
+      },
+      {
         "name": "entity.name.type.omniscript",
-        "match": "\\b(struct|class|union|enum(?:\\s+class)?)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*\\{?)",
+        "match": "\\b(struct|class|union|interface|mixin|enum(?:\\s+class)?)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*\\{?)",
         "captures": {
           "1": { "name": "keyword.declaration.type.omniscript" },
           "2": { "name": "entity.name.type.omniscript" }
         }
+      },      
+      {
+        "name": "entity.name.type.omniscript",
+        "match": "(?:\\b(?:new)?s+(?:heap)?s+)?([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*(?:\\{|\\())"
       },      
       {
         "name": "keyword.struct.omniscript",
@@ -75,6 +92,10 @@
       {
         "name": "keyword.union.omniscript",
         "match": "\\bunion\\b"
+      },
+      {
+        "name": "keyword.mixin.omniscript",
+        "match": "\\bmixin\\b"
       },
       {
         "name": "keyword.interface.omniscript",

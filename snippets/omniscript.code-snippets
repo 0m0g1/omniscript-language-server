@@ -27,7 +27,9 @@
         "description": "Mark a function, variable, or class as deprecated"
     },
     "Inline Deprecated Attribute": {
-        "prefix": ["deprecated"],
+        "prefix": [
+            "deprecated"
+        ],
         "body": [
             "deprecated${0}"
         ],
@@ -44,7 +46,10 @@
         "description": "Nest a module in another file and hide it in the current module"
     },
     "Struct": {
-        "prefix": "strct",
+        "prefix": [
+            "struct",
+            "strct"
+        ],
         "body": [
             "struct ${1:name} {",
             "\t${2:fieldName} : ${3:fieldType} = ${4:defaultValue};",
@@ -157,6 +162,56 @@
             ""
         ],
         "description": "Define a full property"
+    },
+    "Interface": {
+        "prefix": [
+            "interface",
+            "iface"
+        ],
+        "body": [
+            "interface ${1:Name} {",
+            "\t${2:methodName}(${3:params}): ${4:returnType};",
+            "}"
+        ],
+        "description": "interface definition"
+    },
+    "Union": {
+        "prefix": [
+            "union"
+        ],
+        "body": [
+            "union ${1:Name} {",
+            "\t${2:fieldName} : ${3:fieldType};",
+            "}"
+        ],
+        "description": "union definition"
+    },
+    "Mixin": {
+        "prefix": [
+            "mixin",
+            "mxn"
+        ],
+        "body": [
+            "mixin ${1:MixinName} {",
+            "\t${2:// method or property to be shared}",
+            "\t${3:sharedMethod}() {",
+            "\t\t${4:// shared behavior here}",
+            "\t}",
+            "}"
+        ],
+        "description": "Define a reusable mixin"
+    },
+    "Apply Mixin": {
+        "prefix": [
+            "with mixin",
+            "apply mixin"
+        ],
+        "body": [
+            "class ${1:MyClass} with ${2:MixinName} {",
+            "\t${3:// your class members}",
+            "}"
+        ],
+        "description": "Apply mixin to class"
     },
     "Import Statement": {
         "prefix": "import",
@@ -414,14 +469,21 @@
         "description": "False literal"
     },
     "Implied type variable declaration": {
-        "prefix": ["let", "let var"],
+        "prefix": [
+            "let",
+            "let var"
+        ],
         "body": [
             "let ${1:variable} = ${2:value};"
         ],
         "description": "Declare a variable with an implied type"
     },
     "Implied type constant declaration": {
-        "prefix": ["const", "const var", "constant var"],
+        "prefix": [
+            "const",
+            "const var",
+            "constant var"
+        ],
         "body": [
             "const ${1:variable} = ${2:value};"
         ],
@@ -800,7 +862,10 @@
     },
     // Floating point
     "Half": {
-        "prefix": ["half", "f16"],
+        "prefix": [
+            "half",
+            "f16"
+        ],
         "body": [
             "half${0}"
         ],
@@ -817,7 +882,10 @@
         "description": "16-bit floating point value declaration"
     },
     "Float": {
-        "prefix": ["float", "f32"],
+        "prefix": [
+            "float",
+            "f32"
+        ],
         "body": [
             "float"
         ],
@@ -834,7 +902,10 @@
         "description": "32-bit float value declaration"
     },
     "Double": {
-        "prefix": ["double", "f64"],
+        "prefix": [
+            "double",
+            "f64"
+        ],
         "body": [
             "double${0}"
         ],
@@ -851,7 +922,12 @@
         "description": "64-bit double value declaration"
     },
     "FP128": {
-        "prefix": ["f128", "FP128", "long double", "long_double"],
+        "prefix": [
+            "f128",
+            "FP128",
+            "long double",
+            "long_double"
+        ],
         "body": [
             "long_double${0}"
         ],
