@@ -1,0 +1,38 @@
+{
+    "name": "OmniScript Dark",
+    "type": "dark",
+    "colors": {},
+    "tokenColors": [
+        {
+            "scope": "keyword.declaration.type.omniscript",
+            "settings": {
+                "foreground": "#FF7F50",
+                "fontStyle": "bold"
+            }
+        },
+        {
+            "scope": "entity.name.struct.omniscript",
+            "settings": {
+                "foreground": "#6A5ACD"
+            }
+        },
+        {
+            "scope": "entity.name.enum.omniscript",
+            "settings": {
+                "foreground": "#20B2AA"
+            }
+        },
+        {
+            "scope": "entity.name.class.omniscript",
+            "settings": {
+                "foreground": "#FF69B4"
+            }
+        },
+        {
+            "scope": "entity.name.union.omniscript",
+            "settings": {
+                "foreground": "#DAA520"
+            }
+        }
+    ]
+}

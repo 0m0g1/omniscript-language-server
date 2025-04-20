@@ -42,6 +42,13 @@
           "label": "OmniScript Icon Theme",
           "path": "./icons/file-icon-theme.json"
         }
+      ],
+      "themes": [
+        {
+          "label": "OmniScript Dark",
+          "uiTheme": "vs-dark",
+          "path": "./themes/dark-theme.json"
+        }
       ]
     },
     "dependencies": {
