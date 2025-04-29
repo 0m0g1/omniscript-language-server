@@ -1,12 +1,36 @@
 {
     "Constructor": {
-        "prefix": "ctor",
+        "prefix": ["ctor", "constructor"],
         "body": [
             "/**",
-            " *",
+            " * ",
             " */",
-            "constructor() {",
+            "constructor(${1:params}) {",
             "\tsuper();",
+            "\t$0",
+            "}"
+        ],
+        "description": "Constructor"
+    },
+    "Destructor": {
+        "prefix": ["~destructor"],
+        "body": [
+            "/**",
+            " * ",
+            " */",
+            "~destructor(${1:params}) {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Constructor"
+    },
+    "Copy": {
+        "prefix": ["~copy"],
+        "body": [
+            "/**",
+            " * ",
+            " */",
+            "~copy(${1:params}) {",
             "\t$0",
             "}"
         ],
@@ -25,7 +49,7 @@
         "description": "Class Definition"
     },
     "Method Definition": {
-        "prefix": "method",
+        "prefix": ["method", "(", ") =>"],
         "body": [
             "/**",
             " * ",
