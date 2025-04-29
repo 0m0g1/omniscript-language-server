@@ -296,7 +296,7 @@
         "description": "For-In Loop"
     },
     "Main Function Statement": {
-        "prefix": "function",
+        "prefix": ["function main", "main"],
         "body": [
             "function main(${1:int argc, char* argv[]}) => i32 {",
             "\t$TM_SELECTED_TEXT$0",
