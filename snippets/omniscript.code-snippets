@@ -75,6 +75,18 @@
         ],
         "description": "Destructor"
     },
+    "Method Definition": {
+        "prefix": ["method", "(", ") =>"],
+        "body": [
+            "/**",
+            " * ",
+            " */",
+            "${1:name}() => ${2:void} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Method Definition"
+    },
     "Class Definition": {
         "prefix": "class",
         "isFileTemplate": true,
