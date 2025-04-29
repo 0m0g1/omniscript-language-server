@@ -76,7 +76,11 @@
         "description": "Destructor"
     },
     "Method Definition": {
-        "prefix": ["method", "(", ") =>"],
+        "prefix": [
+            "method",
+            "(",
+            ") =>"
+        ],
         "body": [
             "/**",
             " * ",
@@ -290,6 +294,15 @@
             "}"
         ],
         "description": "For-In Loop"
+    },
+    "Main Function Statement": {
+        "prefix": "function",
+        "body": [
+            "function main(${1:int argc, char* argv[]}) => i32 {",
+            "\t$TM_SELECTED_TEXT$0",
+            "\treturn 0;",
+            "}"
+        ]
     },
     "Function Statement": {
         "prefix": "function",
