@@ -130,7 +130,7 @@
         "prefix": "get",
         "body": [
             "",
-            "public get${1:value}() => ${2:type} {",
+            "public get${1:Member}() => ${2:i32} {",
             "\t${3:return $0}",
             "}",
             ""

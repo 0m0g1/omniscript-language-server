@@ -32,6 +32,14 @@
         "match": "\\b(int|int8|int16|int32|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|bool|char|void|half|f16|float|f32|double|f64|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad|string|str|utf8|utf16|utf32)\\b"
       },
       {
+        "name": "keyword.new",
+        "match": "\\bnew\\b"
+      },
+      {
+        "name": "storage.modifier",
+        "match": "\\b(heap)\\b"
+      },
+      {
         "name": "constant.language.boolean.omniscript",
         "match": "\\b(true|false)\\b"
       },      
@@ -79,11 +87,22 @@
           "1": { "name": "keyword.declaration.type.omniscript" },
           "2": { "name": "entity.name.type.omniscript" }
         }
-      },      
+      },
       {
         "name": "entity.name.type.omniscript",
-        "match": "(?:\\b(?:new)?s+(?:heap)?s+)?([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*(?:\\{|\\())"
-      },      
+        "match": "(?:\\bnew\\s+(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()",
+        "captures": {
+          "1": { "name": "entity.name.type.omniscript" }
+        }
+      },
+      {
+        "name": "entity.name.type.omniscript",
+        "match": "(?:\\b(?:new\\s+)?(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\{)"
+      },
+      {
+        "name": "entity.name.function",
+        "match": "(?<!\\bnew\\s+)(?<!\\bheap\\s+)(?<!\\bnew\\s+heap\\s+)\\b([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()"
+      },    
       {
         "name": "keyword.struct.omniscript",
         "match": "\\bstruct\\b"
@@ -184,18 +203,6 @@
       {
         "name": "keyword.declaration",
         "match": "\\blet\\b"
-      },
-      {
-        "name": "keyword.new",
-        "match": "\\bnew\\b"
-      },
-      {
-        "name": "storage.modifier",
-        "match": "\\b(heap)\\b"
-      },
-      {
-        "name": "entity.name.type",
-        "match": "\\b([A-Z][a-zA-Z0-9_]*)\\b(?=\\()"
       },
       {
         "name": "punctuation.section.parameters",
