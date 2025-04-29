@@ -298,7 +298,7 @@
     "Main Function Statement": {
         "prefix": ["function main", "main"],
         "body": [
-            "function main(${1:int argc, char* argv[]}) => i32 {",
+            "function main(${1:argc : int, argv : [utf8]}) => i32 {",
             "\t$TM_SELECTED_TEXT$0",
             "\treturn 0;",
             "}"
