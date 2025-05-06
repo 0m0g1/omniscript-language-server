@@ -60,7 +60,7 @@
     "Constructor": {
         "prefix": "constructor",
         "body": [
-            "constructor() {",
+            "constructor() => void {",
             "\t$0",
             "}"
         ],
@@ -69,7 +69,7 @@
     "Destructor": {
         "prefix": "~destructor",
         "body": [
-            "~destructor() {",
+            "~destructor() => void {",
             "\t$0",
             "}"
         ],
@@ -96,10 +96,10 @@
         "isFileTemplate": true,
         "body": [
             "class ${1:name} {",
-            "\tconstructor(${2:parameters}) {",
+            "\tconstructor(${2:parameters}) => void {",
             "\t\t$0",
             "\t}",
-            "\tdestructor() {",
+            "\tdestructor() => void {",
             "\t\t$0",
             "\t}",
             "}"
