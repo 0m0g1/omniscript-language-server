@@ -24,6 +24,10 @@
         "match": "\\b(let|const|function|if|else|while|for|return)\\b"
       },
       {
+        "name": "storage.type.module",
+        "match": "\\bmodule\\b"
+      },
+      {
         "name": "keyword.control.with.omniscript",
         "match": "\\bwith\\b"
       },
