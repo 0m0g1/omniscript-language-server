@@ -247,8 +247,8 @@
       "begin": "(?<=[=:\\[,\\(]\\s*)<(?=[^=])",
       "end": ">",
       "patterns": [
-        { "include": "#types" },
         { "include": "#comments" },
+        { "include": "#types" },
         {
           "name": "entity.name.type.omniscript",
           "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
@@ -301,6 +301,62 @@
         {
           "name": "punctuation.separator.parameter",
           "match": ","
+        },
+        {
+          "name": "punctuation.definition.struct",
+          "match": "\\{\\s*|\\s*\\}"
+        },
+  {
+          "name": "punctuation.separator.key-value",
+          "match": ":"
+        },
+        {
+          "name": "punctuation.separator.member",
+          "match": "\\."
+        },
+        {
+          "name": "punctuation.separator.arrow",
+          "match": "=>|->|-->"
+        },
+        {
+          "name": "punctuation.definition.parameter",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.definition.parameter-end",
+          "match": "\\)"
+        },
+        {
+          "name": "punctuation.definition.return",
+          "match": "\\b(return)\\b"
+        },
+        {
+          "name": "punctuation.definition.generic",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.definition.generic-end",
+          "match": "\\)"
+        },
+        {
+          "name": "punctuation.separator.enum",
+          "match": ","
+        },
+        {
+          "name": "punctuation.definition.enum",
+          "match": "\\{\\s*|\\s*\\}"
+        },
+        {
+          "name": "punctuation.section.parameters",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.separator.parameter",
+          "match": ","
+        },
+        {
+          "name": "punctuation.section.parameters-end",
+          "match": "\\)"
         }
       ]
     },
