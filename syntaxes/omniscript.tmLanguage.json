@@ -1,318 +1,314 @@
 {
-    "fileTypes": ["os"],
-    "name": "OmniScript",
-    "scopeName": "source.omniscript",
-    "patterns": [
-      {
-        "name": "comment.line.double-slash.omniscript",
-        "match": "//.*$"
-      },
-      {
-        "name": "comment.block.omniscript",
-        "begin": "/\\*",
-        "end": "\\*/",
-        "patterns": [
-          {
-            "begin": "/\\*",
-            "end": "\\*/",
-            "contentName": "comment.block.omniscript"
+  "fileTypes": ["os"],
+  "name": "OmniScript",
+  "scopeName": "source.omniscript",
+  "patterns": [
+    { "include": "#directives" },
+    { "include": "#statements" },
+    { "include": "#shebang" }
+  ],
+  "repository": {
+    "shebang": {
+      "name": "comment.line.shebang.omniscript",
+      "match": "^#!.*$"
+    },
+    "directives": {},
+    "statements": {
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#lineComment" },
+        { "include": "#blockComment" },
+        { "include": "#shebang" },
+        { "include": "#keywords" },
+        { "include": "#types" },
+        { "include": "#declarations" },
+        { "include": "#functions" },
+        { "include": "#literals" },
+        { "include": "#generics" },
+        { "include": "#variables" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        { "include": "#lineComment" },
+        { "include": "#blockComment" }
+      ]
+    },
+    "lineComment": {
+      "name": "comment.line.double-slash.omniscript",
+      "match": "//.*$"
+    },
+    "blockComment": {
+      "name": "comment.block.omniscript",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "pattern": [{ "include": "#blockComment" }]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.omniscript",
+          "match": "\\b(let|const|function|if|else|while|for|return|module|with|as|new|struct|enum|class|union|mixin|interface|deprecated|static|public|private|override|import|extends)\\b"
+        },
+        {
+          "name": "storage.type.module",
+          "match": "\\bmodule\\b"
+        },
+        {
+          "name": "storage.modifier",
+          "match": "\\bheap\\b"
+        },
+        {
+          "name": "variable.language",
+          "match": "\\bthis\\b"
+        },
+        {
+          "name": "keyword.type",
+          "match": "\\b(int|int8|int16|int32|i64|int128|i256|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|bool|char|void|half|f16|float|f32|double|f64|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad|string|str|utf8|utf16|utf32)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        { "include": "#keywords" },
+        {
+          "name": "meta.type.declaration.omniscript",
+          "match": "\\b(enum)(?:\\s+(class))?\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*\\()",
+          "captures": {
+            "1": { "name": "keyword.declaration.type.omniscript" },
+            "2": { "name": "storage.modifier.omniscript" },
+            "3": { "name": "entity.name.type.omniscript" }
           }
-        ]
-      },      
-      {
-        "name": "keyword.control.omniscript",
-        "match": "\\b(let|const|function|if|else|while|for|return)\\b"
-      },
-      {
-        "name": "storage.type.module",
-        "match": "\\bmodule\\b"
-      },
-      {
-        "name": "keyword.control.with.omniscript",
-        "match": "\\bwith\\b"
-      },
-      {
-        "name": "keyword.operator.as.omniscript",
-        "match": "\\bas\\b"
-      }, 
-      {
-        "name": "keyword.type",
-        "match": "\\b(int|int8|int16|int32|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|bool|char|void|half|f16|float|f32|double|f64|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad|string|str|utf8|utf16|utf32)\\b"
-      },
-      {
-        "name": "keyword.new",
-        "match": "\\bnew\\b"
-      },
-      {
-        "name": "storage.modifier",
-        "match": "\\b(heap)\\b"
-      },
-      {
-        "name": "constant.language.boolean.omniscript",
-        "match": "\\b(true|false)\\b"
-      },      
-      {
-        "name": "constant.language.nulls.omniscript",
-        "match": "\\b(null|nullptr)\\b"
-      }, 
-      {
-        "name": "constant.language.this.omniscript",
-        "match": "\\bthis\\b"
-      }, 
-      {
-        "name": "keyword.pointer",
-        "match": "\\*+"
-      },
-      {
-        "name": "keyword.reference",
-        "match": "&+"
-      },
-      {
-        "name": "keyword.array",
-        "match": "\\[\\d*\\]"
-      },
-      {
-        "name": "meta.generic.declaration",
-        "begin": "<",
-        "end": ">",
-        "patterns": [
-          {
-            "name": "keyword.control",
-            "match": "\\bextends\\b"
-          },
-          {
-            "name": "keyword.type",
-            "match": "\\b(int|int8|int16|int32|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|bool|char|void|half|f16|float|f32|double|f64|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad|string|str|utf8|utf16|utf32)\\b"
-          },
-          {
-            "name": "entity.name.type.omniscript",
-            "match": "\\b[a-zA-Z_][a-zA-Z0-9_]*\\b"
-          },
-          {
-            "name": "punctuation.separator.union",
-            "match": "\\|"
+        },
+        {
+          "name": "meta.type.declaration.omniscript",
+          "match": "\\b(struct|class|union|interface|mixin|enum)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*[\\{;])",
+          "captures": {
+            "1": { "name": "keyword.declaration.type.omniscript" },
+            "2": { "name": "entity.name.type.omniscript" }
           }
-        ]
-      },      
-      {
-        "name": "entity.other.inherited-class.mixin.omniscript",
-        "match": "(?<=\\bwith\\s)([A-Za-z_][A-Za-z0-9_]*(\\s*,\\s*[A-Za-z_][A-Za-z0-9_]*)*)",
-        "captures": {
-          "1": {
-            "name": "entity.other.inherited-class.mixin.omniscript"
+        },
+        {
+          "name": "entity.name.type.omniscript",
+          "match": "(?:\\bnew\\s+(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*[\\(\\{])"
+        },
+        {
+          "name": "entity.other.inherited-class.mixin.omniscript",
+          "match": "(?<=\\bwith\\s)([A-Za-z_][A-Za-z0-9_]*(\\s*,\\s*[A-Za-z_][A-Za-z0-9_]*)*)",
+          "captures": {
+            "1": {
+              "name": "entity.other.inherited-class.mixin.omniscript"
+            }
+          }
+        },
+        {
+          "name": "entity.name.type.omniscript",
+          "match": "(?:\\bnew\\s+(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()",
+          "captures": {
+            "1": { "name": "entity.name.type.omniscript" }
+          }
+        },
+        {
+          "name": "entity.name.type.omniscript",
+          "match": "(?:\\b(?:new\\s+)?(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\{)"
+        },
+        {
+          "name": "entity.name.function",
+          "match": "(?<!\\bnew\\s+)(?<!\\bheap\\s+)(?<!\\bnew\\s+heap\\s+)\\b([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()"
+        },
+        {
+          "name": "meta.type.annotation",
+          "begin": "(?<=\\:)\\s*",
+          "end": "(?=\\s*[=;,)])",
+          "patterns": [
+            {
+              "name": "keyword.type",
+              "match": "\\b(int|int8|int16|int32|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|bool|char|void|half|f16|float|f32|double|f64|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad|string|str|utf8|utf16|utf32)\\b"
+            },
+            {
+              "name": "entity.name.type.omniscript",
+              "match": "\\b(?!int\\b|int8\\b|int16\\b|int32\\b|i64\\b|int128\\b|i2nt56\\b|int512\\b|int1024\\b|i8\\b|i16\\b|i32\\b|i64\\b|i128\\b|i256\\b|i512\\b|i1024\\b|BigInt\\b|uint\\b|uint8\\b|uint16\\b|uint32\\b|uint64\\b|uint128\\b|uint256\\b|uint512\\b|uint1024\\b|u8\\b|u16\\b|u32\\b|u64\\b|u128\\b|u256\\b|u512\\b|u1024\\b|bool\\b|char\\b|void\\b|half\\b|f16\\b|float\\b|f32\\b|double\\b|f64\\b|fp128\\b|f128\\b|long_double\\b|x86_fp80\\b|x86_80bit\\b|x87_FP80\\b|Intel_FP80\\b|ppc_fp128\\b|PPC_double_extended\\b|PPC_F128\\b|PPC_Quad\\b|string\\b|str\\b|utf8\\b|utf16\\b|utf32\\b)[a-zA-Z_][a-zA-Z0-9_]*(?:<[^<>]+>)?"
+            }
+          ]
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "name": "meta.variable.declaration.omniscript",
+          "match": "\\b(let|const|var)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*(:)\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+          "captures": {
+            "1": { "name": "storage.type.omniscript" },
+            "2": { "include": "#variables" },
+            "3": { "include": "punctuation.separator.type.omniscript" },
+            "4": { "include": "#types" }
           }
         }
-      },
-      {
-        "name": "entity.name.type.omniscript",
-        "match": "\\b(struct|class|union|interface|mixin|enum(?:\\s+class)?)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*\\{?)",
-        "captures": {
-          "1": { "name": "keyword.declaration.type.omniscript" },
-          "2": { "name": "entity.name.type.omniscript" }
+      ]
+    },
+    "functions": {
+      "patterns": [
+        {
+          "name": "entity.name.function.omniscript",
+          "match": "\\b(?!new\\b|heap\\b|enum\\b|class\\b|struct\\b|union\\b|interface\\b|mixin\\b)(?<![\\;|\\(]s*)([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\(|(?:<[^<>]+>))"
+        },
+        {
+          "name": "entity.name.function.constructor.omniscript",
+          "match": "\\bconstructor(?=\\s*\\()"
+        },
+        {
+          "name": "entity.name.function.destructor.omniscript",
+          "match": "(?<=\\~)\\bdestructor\\b(?=\\s*\\()"
         }
-      },
-      {
-        "name": "entity.name.type.omniscript",
-        "match": "(?:\\bnew\\s+(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()",
-        "captures": {
-          "1": { "name": "entity.name.type.omniscript" }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.local",
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*=)"
+        },
+        {
+          "name": "variable.other.enum-name",
+          "match": "\\b([A-Z][a-zA-Z0-9_]*)\\b(?=\\()"
+        },
+        {
+          "name": "variable.other.enum-value",
+          "match": "\\b([a-z][a-zA-Z0-9_]*)\\b(?=\\s*,|\\s*\\})"
+        },
+        {
+          "name": "variable.other",
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
         }
-      },
-      {
-        "name": "entity.name.type.omniscript",
-        "match": "(?:\\b(?:new\\s+)?(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\{)"
-      },
-      {
-        "name": "entity.name.function",
-        "match": "(?<!\\bnew\\s+)(?<!\\bheap\\s+)(?<!\\bnew\\s+heap\\s+)\\b([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()"
-      },    
-      {
-        "name": "keyword.struct.omniscript",
-        "match": "\\bstruct\\b"
-      },
-      {
-        "name": "keyword.enum.omniscript",
-        "match": "\\benum\\b"
-      },
-      {
-        "name": "keyword.class.omniscript",
-        "match": "\\bclass\\b"
-      },
-      {
-        "name": "keyword.union.omniscript",
-        "match": "\\bunion\\b"
-      },
-      {
-        "name": "keyword.mixin.omniscript",
-        "match": "\\bmixin\\b"
-      },
-      {
-        "name": "keyword.interface.omniscript",
-        "match": "\\binterface\\b"
-      },
-      {
-        "name": "constant.numeric",
-        "match": "\\b(\\d+\\.\\d*|\\d*\\.\\d+)\\b"
-      },     
-      {
-        "name": "punctuation.definition.struct",
-        "match": "\\{\\s*|\\s*\\}"
-      },
-      {
-        "name": "entity.name.function.constructor.omniscript",
-        "match": "\\bconstructor(?=\\s*\\([^\\)]*\\))\\b"
-      },
-      {
-        "name": "entity.name.function.destructor.omniscript",
-        "match": "(?<=\\~)\\bdestructor\\b(?=\\s*\\(\\s*\\))"
-      },
-      {
-        "name": "entity.other.attribute.deprecated.omniscript",
-        "match": "(?<=\\[\\[)\\s*\\bdeprecated(?=(?:\\s*\\(\\s*(?:(?:\\\"[^\\\"]*\\\")|[A-Za-z_][A-Za-z0-9_]*)?\\s*\\))?\\s*\\]\\])"
-      },
-      {
-        "name": "entity.other.attribute.deprecated.omniscript",
-        "match": "\\bdeprecated\\s+(?=(?:(?:static|public|private|override)\\s+)*|(let|const|var|module)|([A-Za-z_][A-Za-z0-9_]*\\s*\\())"
-      },
-      {
-        "name": "storage.modifier.omniscript",
-        "match": "\\b(?:(?:static|public|private|override|deprecated)\\s+)+(?=(?:[A-Za-z_][A-Za-z0-9_]*\\s*\\()|\\b(?=(?:let|var|const|module)))"
-      },
-      {
-        "name": "punctuation.separator.key-value",
-        "match": ":"
-      },
-      {
-        "name": "punctuation.separator.member",
-        "match": "\\."
-      },
-      {
-        "name": "punctuation.separator.arrow",
-        "match": "=>|->|-->"
-      },
-      {
-        "name": "keyword.function",
-        "match": "\\b(let|const|function|var)\\b"
-      },
-      {
-        "name": "punctuation.definition.parameter",
-        "match": "\\("
-      },
-      {
-        "name": "punctuation.definition.parameter-end",
-        "match": "\\)"
-      },
-      {
-        "name": "punctuation.definition.return",
-        "match": "\\b(return)\\b"
-      },
-      
-      {
-        "name": "punctuation.definition.generic",
-        "match": "\\("
-      },
-      {
-        "name": "punctuation.definition.generic-end",
-        "match": "\\)"
-      },
-      {
-        "name": "punctuation.separator.enum",
-        "match": ","
-      },
-      {
-        "name": "punctuation.definition.enum",
-        "match": "\\{\\s*|\\s*\\}"
-      },
-      {
-        "name": "keyword.declaration",
-        "match": "\\blet\\b"
-      },
-      {
-        "name": "punctuation.section.parameters",
-        "match": "\\("
-      },
-      {
-        "name": "punctuation.separator.parameter",
-        "match": ","
-      },
-      {
-        "name": "punctuation.section.parameters-end",
-        "match": "\\)"
-      },
-      {
-        "name": "storage.type",
-        "match": "\\bfunction\\*\\b"
-      },
-      {
-        "name": "constant.numeric.integer.omniscript",
-        "match": "-?\\b\\d+\\b"
-      },
-      {
-        "name": "constant.numeric.float.omniscript",
-        "match": "-?(\\b\\d+\\.\\d*|\\.\\d+|\\d+)([eE][-+]?\\d+)?[fFdD]?\\b"
-      },       
-      {
-        "name": "string.quoted.double.omniscript",
-        "begin": "\"",
-        "end": "\"",
-        "patterns": [
-          {
-            "name": "constant.character.escape.omniscript",
-            "match": "\\\\."
-          }
-        ]
-      },
-      {
-        "name": "string.quoted.single.omniscript",
-        "begin": "'",
-        "end": "'",
-        "patterns": [
-          {
-            "name": "constant.character.escape.omniscript",
-            "match": "\\\\."
-          }
-        ]
-      },
-      {
-        "name": "constant.character.omniscript",
-        "match": "'(?:[^'\\\\]|\\\\.)'"
-      },
-      {
-        "name": "meta.type.annotation",
-        "begin": "(?<=\\:)\\s*",
-        "end": "(?=\\s*[=;,)])",
-        "patterns": [
-          {
-            "name": "keyword.type",
-            "match": "\\b(int|int8|int16|int32|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|bool|char|void|half|f16|float|f32|double|f64|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad|string|str|utf8|utf16|utf32)\\b"
-          },
-          {
-            "name": "entity.name.type.omniscript",
-            "match": "\\b(?!int\\b|int8\\b|int16\\b|int32\\b|i64\\b|int128\\b|i2nt56\\b|int512\\b|int1024\\b|i8\\b|i16\\b|i32\\b|i64\\b|i128\\b|i256\\b|i512\\b|i1024\\b|BigInt\\b|uint\\b|uint8\\b|uint16\\b|uint32\\b|uint64\\b|uint128\\b|uint256\\b|uint512\\b|uint1024\\b|u8\\b|u16\\b|u32\\b|u64\\b|u128\\b|u256\\b|u512\\b|u1024\\b|bool\\b|char\\b|void\\b|half\\b|f16\\b|float\\b|f32\\b|double\\b|f64\\b|fp128\\b|f128\\b|long_double\\b|x86_fp80\\b|x86_80bit\\b|x87_FP80\\b|Intel_FP80\\b|ppc_fp128\\b|PPC_double_extended\\b|PPC_F128\\b|PPC_Quad\\b|string\\b|str\\b|utf8\\b|utf16\\b|utf32\\b)[a-zA-Z_][a-zA-Z0-9_]*(?:<[^<>]+>)?"
-          },
-          {
-            "name": "variable.other.field",
-            "match": "\\b([a-z][a-zA-Z0-9_]*)\\b"
-          }
-        ]
-      },     
-      {
-        "name": "variable.other.local",
-        "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*=)"
-      },
-      {
-        "name": "variable.other.enum-name",
-        "match": "\\b([A-Z][a-zA-Z0-9_]*)\\b(?=\\()"
-      },
-      {
-        "name": "variable.other.enum-value",
-        "match": "\\b([a-z][a-zA-Z0-9_]*)\\b(?=\\s*,|\\s*\\})"
-      },
-      {
-        "name": "variable.other",
-        "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
-      }
-    ],
-    "repository": {}
+      ]
+    },
+    "literals": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.omniscript",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "constant.language.nulls.omniscript",
+          "match": "\\b(null|nullptr)\\b"
+        },
+        {
+          "name": "constant.language.this.omniscript",
+          "match": "\\bthis\\b"
+        },
+        {
+          "name": "constant.numeric.integer.omniscript",
+          "match": "-?\\b\\d+\\b"
+        },
+        {
+          "name": "constant.numeric.float.omniscript",
+          "match": "-?(\\b\\d+\\.\\d*|\\.\\d+|\\d+)([eE][-+]?\\d+)?[fFdD]?\\b"
+        },
+        {
+          "name": "string.quoted.double.omniscript",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.omniscript",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.omniscript",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.omniscript",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "constant.character.omniscript",
+          "match": "'(?:[^'\\\\]|\\\\.)'"
+        }
+      ]
+    },
+    "generics": {
+      "name": "meta.generic.declaration.omniscript",
+      "begin": "(?<=[=:\\[,\\(]\\s*)<(?=[^=])",
+      "end": ">",
+      "patterns": [
+        {"include": "#types"},
+        {"include": "#comments"},
+        {
+          "name": "entity.name.type.omniscript",
+          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+        },
+        {
+          "name": "support.type.omniscript",
+          "match": "\\b(any|variant)\\b"
+        },
+        {
+          "name": "punctuation.separator.union.omniscript",
+          "match": "\\|"
+        },
+        {
+          "name": "punctuation.separator.comma.omniscript",
+          "match": ","
+        },
+        {"include": "#generics"}
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "keyword.pointer",
+          "match": "\\*+"
+        },
+        {
+          "name": "keyword.reference",
+          "match": "&+"
+        },
+        {
+          "name": "keyword.array",
+          "match": "\\[\\d*\\]"
+        },
+        {
+          "name": "punctuation.separator.key-value",
+          "match": ":"
+        },
+        {
+          "name": "punctuation.separator.member",
+          "match": "\\."
+        },
+        {
+          "name": "punctuation.separator.arrow",
+          "match": "=>|->|-->"
+        },
+        {
+          "name": "punctuation.definition.parameter",
+          "match": "[\\(\\)]"
+        },
+        {
+          "name": "punctuation.separator.parameter",
+          "match": ","
+        }
+      ]
+    },
+    "attributes": {
+      "patterns": [
+        {
+          "name": "entity.other.attribute.deprecated.omniscript",
+          "match": "(\\[\\[)\\s*deprecated\\b"
+        }
+      ]
+    },
+    "decl-block": {
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.block.omniscript",
+      "patterns": [{ "include": "#variables" }, { "include": "#expressions" }]
+    }
   }
-  
+}
