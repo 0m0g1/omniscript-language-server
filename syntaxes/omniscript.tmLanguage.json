@@ -21,6 +21,7 @@
         { "include": "#shebang" },
         { "include": "#keywords" },
         { "include": "#types" },
+        { "include": "#import-statements" },
         { "include": "#declarations" },
         { "include": "#functions" },
         { "include": "#literals" },
@@ -49,7 +50,11 @@
       "patterns": [
         {
           "name": "keyword.control.omniscript",
-          "match": "\\b(if|else|while|for|return|with|as|new|import|extends)\\b"
+          "match": "\\b(if|else|while|for|return|with|as|new|import|extends|from)\\b"
+        },
+        {
+          "name": "keyword.operator.omniscript",
+          "match": "\\bas\\b"
         },
         {
           "name": "storage.type.function.omniscript",
@@ -122,6 +127,10 @@
           "match": "(?:\\b(?:new\\s+)?(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\{)"
         },
         {
+          "name": "entity.name.type.omniscript",
+          "match": "(?:\\b(?:new\\s+)?(?:heap\\s+)?)([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\{)"
+        },
+        {
           "name": "entity.name.function",
           "match": "(?<!\\bnew\\s+)(?<!\\bheap\\s+)(?<!\\bnew\\s+heap\\s+)\\b([a-zA-Z_][a-zA-Z0-9_]+)(?=\\s*\\()"
         },
@@ -137,6 +146,24 @@
             {
               "name": "entity.name.type.omniscript",
               "match": "\\b(?!int\\b|int8\\b|int16\\b|int32\\b|i64\\b|int128\\b|i2nt56\\b|int512\\b|int1024\\b|i8\\b|i16\\b|i32\\b|i64\\b|i128\\b|i256\\b|i512\\b|i1024\\b|BigInt\\b|uint\\b|uint8\\b|uint16\\b|uint32\\b|uint64\\b|uint128\\b|uint256\\b|uint512\\b|uint1024\\b|u8\\b|u16\\b|u32\\b|u64\\b|u128\\b|u256\\b|u512\\b|u1024\\b|bool\\b|char\\b|void\\b|half\\b|f16\\b|float\\b|f32\\b|double\\b|f64\\b|fp128\\b|f128\\b|long_double\\b|x86_fp80\\b|x86_80bit\\b|x87_FP80\\b|Intel_FP80\\b|ppc_fp128\\b|PPC_double_extended\\b|PPC_F128\\b|PPC_Quad\\b|string\\b|str\\b|utf8\\b|utf16\\b|utf32\\b)[a-zA-Z_][a-zA-Z0-9_]*(?:<[^<>]+>)?"
+            }
+          ]
+        }
+      ]
+    },
+    "import-statements": {
+      "name": "meta.import.named.omniscript",
+      "begin": "\\bimport\\b",
+      "end": "\\b(?:from\\s+(?:(?:(?:\"|\\')\\s*)?[\\w,\\s]+))?(?:(?:(?:\"|\\')\\s*))?(?:;|$)",
+      "patterns": [
+        {
+          "name": "meta.import.names",
+          "match": "\\{\\s*([\\w,\\s]+)\\s*\\}",
+          "patterns": [
+            { "include": "#keywords" },
+            {
+              "name": "entity.name.type.omniscript",
+              "match": "\b([a-zA-Z_][a-zA-Z0-9_]*)\b"
             }
           ]
         }
@@ -160,7 +187,7 @@
       "patterns": [
         {
           "name": "entity.name.function.omniscript",
-          "match": "\\b(?!new\\b|heap\\b|enum\\b|class\\b|struct\\b|union\\b|interface\\b|mixin\\b)(?<![\\;|\\(]s*)([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=\\(|(?:<[^<>]+>))"
+          "match": "\\b(?!new\\b|heap\\b|enum\\b|class\\b|struct\\b|union\\b|interface\\b|mixin\\b)([a-zA-Z_][a-zA-Z0-9_]*)\\s*(?=<(?:[^<>]|<[^<>]*>)*>\\s*\\()"
         },
         {
           "name": "entity.name.function.constructor.omniscript",
@@ -244,9 +271,10 @@
     },
     "generics": {
       "name": "meta.generic.declaration.omniscript",
-      "begin": "(?<=[=:\\[,\\(]\\s*)<(?=[^=])",
-      "end": ">",
+      "begin": "(<|\\b([a-zA-Z_][a-zA-Z0-9_]*)s*)(?=\\s*[a-zA-Z_]\\w*(?:\\s+extends\\s+[^>]+)?(\\s*,\\s*[a-zA-Z_]\\w*(\\s+extends\\s+[^>]+)?)*\\s*(?:<|>))",
+      "end": "<|>",
       "patterns": [
+        { "include": "#punctuation" },
         { "include": "#comments" },
         { "include": "#types" },
         {
@@ -306,7 +334,7 @@
           "name": "punctuation.definition.struct",
           "match": "\\{\\s*|\\s*\\}"
         },
-  {
+        {
           "name": "punctuation.separator.key-value",
           "match": ":"
         },
