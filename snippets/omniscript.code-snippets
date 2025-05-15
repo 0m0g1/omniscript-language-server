@@ -229,6 +229,11 @@
         ],
         "description": "Apply mixin to class"
     },
+    "Include Statement": {
+        "prefix": "include",
+        "body": "include \"${0:./module/path}\";",
+        "description": "Include a file in another file"
+    },
     "Import Statement": {
         "prefix": "import",
         "body": "import {$0} from \"${1:./module/path}\";",
