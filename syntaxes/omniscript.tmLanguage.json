@@ -58,7 +58,7 @@
         },
         {
           "name": "storage.type.function.omniscript",
-          "match": "\\bfunction\\b"
+          "match": "\\b(function|fn)\\b"
         },
         {
           "name": "storage.type.declaration.omniscript",
