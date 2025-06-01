@@ -973,6 +973,13 @@
         ],
         "description": "128-bit float value declaration"
     },
+    "FP80": {
+        "prefix": "f80",
+        "body": [
+            "f80${0}"
+        ],
+        "description": "80-bit float value declaration"
+    },
     "X86_FP80": {
         "prefix": "x86_fp80",
         "body": [
