@@ -66,7 +66,7 @@
         },
         {
           "name": "storage.modifier.omniscript",
-          "match": "\\b(static|public|private|override|deprecated|heap|intrinsic|extern)\\b"
+          "match": "\\b(static|public|private|override|deprecated|heap|intrinsic|extern|volatile)\\b"
         },
         {
           "name": "storage.type.module.omniscript",
@@ -78,7 +78,7 @@
         },
         {
           "name": "keyword.type.omniscript",
-          "match": "\\b(int|int8|int16|int32|i64|int128|i256|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|usize|size_t|bool|char|void|half|f16|float|f32|double|f64|f80|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad)\\b"
+          "match": "\\b(int|int8|int16|int32|i32|int64|i64|int128|i256|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|usize|size_t|bool|char|void|half|f16|float|f32|double|f64|f80|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad)\\b"
         }
       ]
     },
@@ -145,11 +145,11 @@
           "patterns": [
             {
               "name": "keyword.type",
-              "match": "\\b(int|int8|int16|int32|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|usize|size_t|bool|char|void|half|f16|float|f32|double|f64|f80|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad)\\b"
+              "match": "\\b(int|int8|int16|int32|i32|int64|i64|int128|i2nt56|int512|int1024|i8|i16|i32|i64|i128|i256|i512|i1024|BigInt|uint|uint8|uint16|uint32|uint64|uint128|uint256|uint512|uint1024|u8|u16|u32|u64|u128|u256|u512|u1024|usize|size_t|bool|char|void|half|f16|float|f32|double|f64|f80|fp128|f128|long_double|x86_fp80|x86_80bit|x87_FP80|Intel_FP80|ppc_fp128|PPC_double_extended|PPC_F128|PPC_Quad)\\b"
             },
             {
               "name": "entity.name.type.omniscript",
-              "match": "\\b(?!int\\b|int8\\b|int16\\b|int32\\b|i64\\b|int128\\b|i2nt56\\b|int512\\b|int1024\\b|i8\\b|i16\\b|i32\\b|i64\\b|i128\\b|i256\\b|i512\\b|i1024\\b|BigInt\\b|uint\\b|uint8\\b|uint16\\b|uint32\\b|uint64\\b|uint128\\b|uint256\\b|uint512\\b|uint1024\\b|u8\\b|u16\\b|u32\\b|u64\\b|u128\\b|u256\\b|u512\\b|u1024\\b|bool\\b|char\\b|void\\b|half\\b|f16\\b|float\\b|f32\\b|double\\b|f64\\b|f80\\b|fp128\\b|f128\\b|long_double\\b|x86_fp80\\b|x86_80bit\\b|x87_FP80\\b|Intel_FP80\\b|ppc_fp128\\b|PPC_double_extended\\b|PPC_F128\\b|PPC_Quad\\b)[a-zA-Z_][a-zA-Z0-9_]*(?:<[^<>]+>)?"
+              "match": "\\b(?!int\\b|int8\\b|int16\\b|int32\\b|i32\\b|int64\\b|i64\\b|int128\\b|i2nt56\\b|int512\\b|int1024\\b|i8\\b|i16\\b|i32\\b|i64\\b|i128\\b|i256\\b|i512\\b|i1024\\b|BigInt\\b|uint\\b|uint8\\b|uint16\\b|uint32\\b|uint64\\b|uint128\\b|uint256\\b|uint512\\b|uint1024\\b|u8\\b|u16\\b|u32\\b|u64\\b|u128\\b|u256\\b|u512\\b|u1024\\b|bool\\b|char\\b|void\\b|half\\b|f16\\b|float\\b|f32\\b|double\\b|f64\\b|f80\\b|fp128\\b|f128\\b|long_double\\b|x86_fp80\\b|x86_80bit\\b|x87_FP80\\b|Intel_FP80\\b|ppc_fp128\\b|PPC_double_extended\\b|PPC_F128\\b|PPC_Quad\\b)[a-zA-Z_][a-zA-Z0-9_]*(?:<[^<>]+>)?"
             }
           ]
         }
