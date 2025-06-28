@@ -62,7 +62,7 @@
         },
         {
           "name": "storage.type.declaration.omniscript",
-          "match": "\\b(let|const|struct|enum|class|union|mixin|interface)\\b"
+          "match": "\\b(let|const|var|struct|enum|class|union|mixin|interface)\\b"
         },
         {
           "name": "storage.modifier.omniscript",
@@ -84,12 +84,19 @@
     },
     "types": {
       "patterns": [
-        { "include": "#keywords" },
+        {
+          "name": "meta.type.alias.omniscript", 
+          "match": "\\b(type|using)\\s+([a-zA-Z_][a-zA-Z0-9_]*)(?=\\s*=|;)",
+          "captures": {
+            "1": { "name": "keyword.declaration.type.omniscript" },
+            "2": { "name": "entity.name.type.omniscript" }
+          }
+        },
         {
           "name": "meta.type.declaration.omniscript",
           "match": "\\b(enum)(?:\\s+(class))?\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*\\()",
           "captures": {
-            "1": { "name": "keyword.declaration.type.omniscript" },
+            "1": { "include": "#keywords" },
             "2": { "name": "storage.modifier.omniscript" },
             "3": { "name": "entity.name.type.omniscript" }
           }
@@ -98,7 +105,7 @@
           "name": "meta.type.declaration.omniscript",
           "match": "\\b(struct|class|union|interface|mixin|enum)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*[\\{;])",
           "captures": {
-            "1": { "name": "keyword.declaration.type.omniscript" },
+            "1": { "include": "#keywords" },
             "2": { "name": "entity.name.type.omniscript" }
           }
         },
@@ -207,7 +214,7 @@
       "patterns": [
         {
           "name": "variable.other.local",
-          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*=)"
+          "match": "(?<!\\btype\\s+)\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b(?=\\s*=)"
         },
         {
           "name": "variable.other.enum-name",
@@ -219,7 +226,7 @@
         },
         {
           "name": "variable.other",
-          "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
+          "match": "(?<!\\btype\\s+)\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b"
         }
       ]
     },
